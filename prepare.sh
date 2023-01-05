@@ -71,9 +71,14 @@ if $INSTALL_BREW = true
 then
   echo $I"Installing brew from 'brew.sh' - Installer will ask for your sudo password."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" NONINTERACTIVE=1
-
-  echo '# Set PATH, MANPATH, etc., for Homebrew.' >> /Users/luna/.zprofile    # Assuming ZSH
-  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/luna/.zprofile   # Assuming ZSH
-  eval "$(/opt/homebrew/bin/brew shellenv)"                                   # Assuming ZSH
-  brew analytics off                                                          # Disable brew analytics
+  if [ $? -eq 0 ];                                                                # Check if Homebrew installed properly
+  then 
+    echo $I"Homebrew successfully installed."                                     # Homebrew Install Succeeded
+  else 
+    echo $E"Homebrew install may have failed. Check above for more information."  # Homebrew Install Failed
+  fi
+  echo '# Set PATH, MANPATH, etc., for Homebrew.' >> /Users/luna/.zprofile        # Assuming ZSH
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/luna/.zprofile       # Assuming ZSH
+  eval "$(/opt/homebrew/bin/brew shellenv)"                                       # Assuming ZSH
+  brew analytics off                                                              # Disable brew analytics
 fi
