@@ -9,6 +9,7 @@ I="[INFO] "
 E="[ERROR] "
 P="[PASS] "
 W="[WARNING] "
+F="[FATAL] "
 
 # Flags for testing, etc.
 DEBUG=true           # May be used to enable/disable messages for testing.
@@ -71,14 +72,15 @@ if $INSTALL_BREW = true
 then
   echo $I"Installing brew from 'brew.sh' - Installer will ask for your sudo password."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" NONINTERACTIVE=1
-  if [ $? -eq 0 ];                                                                # Check if Homebrew installed properly
+  if [ $? -eq 0 ];                                                                          # Check if Homebrew installed properly
   then 
-    echo $I"Homebrew successfully installed."                                     # Homebrew Install Succeeded
+    echo $I"Homebrew successfully installed."                                               # Homebrew Install Succeeded
   else 
-    echo $E"Homebrew install may have failed. Check above for more information."  # Homebrew Install Failed
+    echo $F"Homebrew install may have failed. Check above for more information, exiting."   # Homebrew Install Failed
+    exit 1
   fi
-  echo '# Set PATH, MANPATH, etc., for Homebrew.' >> /Users/luna/.zprofile        # Assuming ZSH
-  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/luna/.zprofile       # Assuming ZSH
-  eval "$(/opt/homebrew/bin/brew shellenv)"                                       # Assuming ZSH
+  echo '# Set PATH, MANPATH, etc., for Homebrew.' >> /Users/luna/.zprofile        # Assuming ZSH - if not using ZSH, cry?
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/luna/.zprofile       # Assuming ZSH - if not using ZSH, cry?
+  eval "$(/opt/homebrew/bin/brew shellenv)"                                       # Assuming ZSH - if not using ZSH, cry?
   brew analytics off                                                              # Disable brew analytics
 fi
