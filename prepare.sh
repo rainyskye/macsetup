@@ -30,7 +30,8 @@ fi
 # Hello message
 echo "
 -------------------------------------------------------"
-echo "                         __             __             
+echo "
+                         __             __             
  .--------.---.-.----.--|  .-----.-----|  .-----.--.--.
  |        |  _  |  __|  _  |  -__|  _  |  |  _  |  |  |
  |__|__|__|___._|____|_____|_____|   __|__|_____|___  |
@@ -63,4 +64,16 @@ if ! command -v brew &> /dev/null
 then
     echo $W"brew wasn't found, and is required for setup, will add to the install queue."
     INSTALL_BREW=true
+fi
+
+# Install brew if not already installed
+if $INSTALL_BREW = true
+then
+  echo $I"Installing brew from 'brew.sh' - Installer will ask for your sudo password."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" NONINTERACTIVE=1
+
+  echo '# Set PATH, MANPATH, etc., for Homebrew.' >> /Users/luna/.zprofile    # Assuming ZSH
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/luna/.zprofile   # Assuming ZSH
+  eval "$(/opt/homebrew/bin/brew shellenv)"                                   # Assuming ZSH
+  brew analytics off                                                          # Disable brew analytics
 fi
