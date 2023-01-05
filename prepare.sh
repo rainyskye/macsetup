@@ -27,6 +27,19 @@ then
   echo $D"Running macOS "$(sw_vers -productVersion)", build "$(sw_vers -buildVersion)
 fi
 
+# Hello message
+echo "
+-------------------------------------------------------"
+echo "                         __             __             
+ .--------.---.-.----.--|  .-----.-----|  .-----.--.--.
+ |        |  _  |  __|  _  |  -__|  _  |  |  _  |  |  |
+ |__|__|__|___._|____|_____|_____|   __|__|_____|___  |
+                                 |__|           |_____|"
+echo "
+-------------------------------------------------------"
+echo "             days without explosions > [0]"
+echo "-------------------------------------------------------"
+
 # Convert version strings into plain integer - thamk stack overflow <3
 function versionToInt() {
   local IFS=.
