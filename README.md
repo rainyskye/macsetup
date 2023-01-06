@@ -17,4 +17,6 @@ Just run the script by copying below and pasting into the terminal.
 
 Please note that you should **always** check scripts before you run them on your device.
 
-`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/lunaskyy/macsetup/main/setup.sh)"`
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/lunaskyy/macsetup/main/setup.sh)"
+```
