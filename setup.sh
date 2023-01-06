@@ -6,9 +6,9 @@
 
 D="[DEBUG] "
 I="[INFO] "
-E="[ERROR] "
 P="[PASS] "
 W="[WARNING] "
+E="[ERROR] "
 F="[FATAL] "
 
 # Flags for testing, etc.
@@ -39,7 +39,7 @@ echo "
                                  |__|           |_____|"
 echo "
 -------------------------------------------------------"
-echo "             days without explosions > [0]"
+echo "------------ days without explosions > [0] ------------"
 echo "-------------------------------------------------------"
 
 # Convert version strings into plain integer - thamk stack overflow <3
@@ -63,8 +63,17 @@ fi
 # Check if brew is installed, and set it to be installed if it isn't.
 if ! command -v brew &> /dev/null
 then
-    echo $W"brew wasn't found, and is required for setup, will add to the install queue."
-    INSTALL_BREW=true
+  echo $W"Brew wasn't found, and is required for setup, will add to the install queue."
+  INSTALL_BREW=true
+else
+  read -r -p "Brew was found, do you want to update and upgrade all packages? [y/N] " response
+  if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+  then
+      brew update
+      brew upgrade
+      brew cleanup
+  fi
+  brew update 
 fi
 
 # Install brew if not already installed
@@ -84,3 +93,4 @@ then
   eval "$(/opt/homebrew/bin/brew shellenv)"                                       # Assuming ZSH - if not using ZSH, cry?
   brew analytics off                                                              # Disable brew analytics
 fi
+
