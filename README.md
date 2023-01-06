@@ -7,6 +7,7 @@
 ### Things to implement/improve:
 - [x] Automatically Install [brew.sh](https://brew.sh) if it's not already installed.
 - [ ] *(In-Progress)* Automatically install configure CLI tools (e.g: Git, macchina, etc.)
-- [ ] Set Wallpaper automatically
+- [x] Setup Finder with custom settings (e.g: Show Hidden Files, Show all File extensions, etc.)
+- [x] Set Wallpaper automatically
 - [ ] Configure Dock items automatically
 - [ ] Set Lock Screen text ("Authorised use only, etc.")

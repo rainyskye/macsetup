@@ -15,6 +15,7 @@ F="[FATAL] "
 DEBUG=true           # May be used to enable/disable messages for testing.
 INTERACTIVE=false    # TODO: Add ability to interact with script (e.g: choose whether to install missing deps or exit)
 YELL=false           # TODO: Use 'say' to alert user of errors, user input required, or completion.
+WHEREAREWE=$(pwd)
 
 # Programs and stuff
 INSTALL_BREW=false
@@ -26,6 +27,7 @@ then
   echo $D"System architecture is "$(uname -m)", CPU model is "$(sysctl -n machdep.cpu.brand_string)
   echo $D"Hostname is "$(sysctl -n kern.hostname)
   echo $D"Running macOS "$(sw_vers -productVersion)", build "$(sw_vers -buildVersion)
+  echo $D"Running in "$WHEREAREWE
 fi
 
 # Hello message
@@ -69,11 +71,10 @@ else
   read -r -p "Brew was found, do you want to update and upgrade all packages? [y/N] " response
   if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
   then
-      brew update
-      brew upgrade
-      brew cleanup
+      brew update     # Update repos
+      brew upgrade    # Upgrade Packages
+      brew cleanup    # Cleanup old packages
   fi
-  brew update 
 fi
 
 # Install brew if not already installed
@@ -94,3 +95,18 @@ then
   brew analytics off                                                              # Disable brew analytics
 fi
 
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+defaults write com.apple.Finder AppleShowAllFiles true
+killall Dock; killall Finder
+
+# Install required cli utilities with brew
+brew install m-cli macchina 
+
+# Cope macchina config
+mkdir -p ~/.config/macchina/    # Create macchina config folder
+cp -r $WHEREAREWE/configs/macchina/* ~/.config/macchina/
+
+# Pull and set wallpaper from wallpaper folder
+cp $WHEREAREWE/wallpaper/wallpaper.jpeg ~/.config/wallpaper.jpeg
+m wallpaper ~/.config/wallpaper.jpeg
