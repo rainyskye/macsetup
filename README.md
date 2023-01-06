@@ -6,7 +6,7 @@
 
 ### Things to implement/improve:
 - [x] Automatically Install [brew.sh](https://brew.sh) if it's not already installed.
-- [-] Automatically install configure CLI tools (e.g: Git, macchina, etc.)
+- [ ] *(In-Progress)* Automatically install configure CLI tools (e.g: Git, macchina, etc.)
 - [ ] Set Wallpaper automatically
 - [ ] Configure Dock items automatically
 - [ ] Set Lock Screen text ("Authorised use only, etc.")
