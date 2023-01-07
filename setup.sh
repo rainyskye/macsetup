@@ -83,7 +83,8 @@ else
   then
       brew update     # Update repos
       brew upgrade    # Upgrade Packages
-      brew cleanup    # Cleanup old packages  fi
+      brew cleanup    # Cleanup old packages
+  fi
 fi
 
 # Install brew if not already installed
