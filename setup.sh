@@ -147,7 +147,15 @@ fi
 
 
 ### Install Mac App Store apps - use `mas search ____` to find app ids
-brew install mas
+echo $I"Installing Mac App Store apps using 'mas'"
+
+if exists mas; then
+  echo $I"mas is installed, won't attempt reinstall."
+else
+  echo $I"mas wasn't found. Installing mas."
+  brew install mas
+fi
+
 mas install 1451685025  # wireguard (vpn)
 mas install 497799835   # xcode - (this could become an issue down the road, installing xcode requires the xcode tools license to be re-accepted???)
 mas install 640199958   # apple developer (developer news/info app)
@@ -193,6 +201,9 @@ brew install --cask visual-studio-code
 
 # discord
 brew install --cask discord
+
+# utm
+brew install --cask utm
 
 # zenmap (required sudo to install and is funky sometimes - required rosetta, is also broken on arm64?)
 # brew install --cask zenmap
