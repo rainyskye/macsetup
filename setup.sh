@@ -78,7 +78,7 @@ then
   echo $W"Brew wasn't found, and is required for setup, will add to the install queue."
   INSTALL_BREW=true
 else
-  read -p "Are you sure you want to continue? <y/N> " prompt
+  read -p "Brew is installed, would you like to upgrade all packages before continuing? <y/N> " prompt
   if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" ]]
   then
       brew update     # Update repos
@@ -99,29 +99,36 @@ then
     echo $F"Homebrew install may have failed. Check above for more information, exiting."   # Homebrew Install Failed
     exit 1
   fi
+  echo $I"Setting PATH for homebrew"
   echo '# Set PATH, MANPATH, etc., for Homebrew.' >> /Users/luna/.zprofile        # Assuming ZSH - if not using ZSH, cry?
   echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/luna/.zprofile       # Assuming ZSH - if not using ZSH, cry?
   eval "$(/opt/homebrew/bin/brew shellenv)"                                       # Assuming ZSH - if not using ZSH, cry?
+  echo $I"Disabling homebrew analytics"
   brew analytics off                                                              # Disable brew analytics
 fi
 
+echo $I"Enabling full path in title of Finder app"
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+echo $I"Enabling all file extensions"
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+echo $I"Enabling showing of hidden files"
 defaults write com.apple.Finder AppleShowAllFiles true
+echo $I"Killing Dock and Finder"
 killall Dock; killall Finder
 
 # Install required cli utilities with brew
+echo $I"Installing m-cli, macchina, htop"
 brew install m-cli macchina htop
 
 ### Install Mac App Store apps - use `mas search ____` to find app ids
 brew install mas
-mas install 1451685025  # wireguard
-mas install 497799835   # xcode
-mas install 640199958   # apple developer
-mas install 899247664   # testflight
-mas install 1557247094  # hextedit
-mas install 1518425043  # boop
-mas install 937984704   # amphetamine
+mas install 1451685025  # wireguard (vpn)
+mas install 497799835   # xcode - (this could become an issue down the road, installing xcode requires the xcode tools license to be re-accepted???)
+mas install 640199958   # apple developer (developer news/info app)
+mas install 899247664   # testflight (apple test deployment)
+mas install 1557247094  # hextedit (hex editor)
+mas install 1518425043  # boop (code tools)
+mas install 937984704   # amphetamine (prevent mac from sleeping)
 
 ### Install some apps from homebrew casks
 
@@ -135,7 +142,7 @@ brew install --cask google-chrome
 brew install --cask 1password
 
 # android-platform-tools
-brew install --cask andorid-platform-tools
+brew install --cask android-platform-tools
 
 # balenaetcher
 brew install --cask balenaetcher
@@ -158,6 +165,12 @@ brew install --cask spotify
 # visual-studio-code
 brew install --cask visual-studio-code
 
+# discord
+brew install --cask discord
+
+# zenmap (required sudo to install and is funky sometimes - required rosetta, is also broken on arm64?)
+# brew install --cask zenmap
+
 # Cope macchina config
 mkdir -p ~/.config/macchina/    # Create macchina config folder
 cp -r $WHEREAREWE/configs/macchina/* ~/.config/macchina/
@@ -165,3 +178,5 @@ cp -r $WHEREAREWE/configs/macchina/* ~/.config/macchina/
 # Pull and set wallpaper from wallpaper folder
 cp $WHEREAREWE/wallpaper/wallpaper.jpeg ~/.config/wallpaper.jpeg
 m wallpaper ~/.config/wallpaper.jpeg
+
+
