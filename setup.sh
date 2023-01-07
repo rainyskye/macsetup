@@ -4,13 +4,6 @@
 # prepare.sh | Prepare and Verify all necessary requirements are met before setup.
 # pls ignore the jank, this is all thrown together with 0 sleep <3
 
-D="[DEBUG] "
-I="[INFO] "
-P="[PASS] "
-W="[WARNING] "
-E="[ERROR] "
-F="[FATAL] "
-
 red=`tput setaf 1`
 green=`tput setaf 2`
 yellow=`tput setaf 3`
@@ -19,6 +12,13 @@ pink=`tput setaf 5`
 cyan=`tput setaf 6`
 white=`tput setaf 7`
 reset=`tput sgr0`
+
+D="${pink}[DEBUG]${reset} "
+I="${cyan}[INFO]${reset} "
+P="${green}[PASS]${reset} "
+W="${yellow}[WARNING]${reset} "
+E="${red}[ERROR]${reset} "
+F="${red}[FATAL]${reset} "
 
 # Flags for testing, etc.
 DEBUG=true           # May be used to enable/disable messages for testing.
@@ -32,6 +32,7 @@ INSTALL_BREW=false
 # If debug is enabled, print information about the machine.
 if $DEBUG = true
 then
+  echo $D$I$P$W$E$F"<<< Colour Test"
   echo $D"Debugging is on, will print a lot of information about the machine."
   echo $D"System architecture is "$(uname -m)", CPU model is "$(sysctl -n machdep.cpu.brand_string)
   echo $D"Hostname is "$(sysctl -n kern.hostname)
@@ -77,13 +78,12 @@ then
   echo $W"Brew wasn't found, and is required for setup, will add to the install queue."
   INSTALL_BREW=true
 else
-  read -r -p "Brew was found, do you want to update and upgrade all packages? [y/N] " response
-  if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+  read -p "Are you sure you want to continue? <y/N> " prompt
+  if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" ]]
   then
       brew update     # Update repos
       brew upgrade    # Upgrade Packages
-      brew cleanup    # Cleanup old packages
-  fi
+      brew cleanup    # Cleanup old packages  fi
 fi
 
 # Install brew if not already installed
