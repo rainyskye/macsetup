@@ -13,12 +13,19 @@ cyan=`tput setaf 6`
 white=`tput setaf 7`
 reset=`tput sgr0`
 
+# woo pretty colours
 D="${pink}[DEBUG]${reset} "
 I="${cyan}[INFO]${reset} "
 P="${green}[PASS]${reset} "
 W="${yellow}[WARNING]${reset} "
 E="${red}[ERROR]${reset} "
 F="${red}[FATAL]${reset} "
+
+# function to check if a command exists
+exists()
+{
+  command -v "$1" >/dev/null 2>&1
+}
 
 # Flags for testing, etc.
 DEBUG=true           # May be used to enable/disable messages for testing.
@@ -117,8 +124,27 @@ echo $I"Killing Dock and Finder"
 killall Dock; killall Finder
 
 # Install required cli utilities with brew
-echo $I"Installing m-cli, macchina, htop"
-brew install m-cli macchina htop
+if exists m; then
+  echo $I"m-cli is installed, won't attempt reinstall."
+else
+  echo $I"m-cli wasn't found. Installing m-cli."
+  brew install m-cli
+fi
+
+if exists macchina; then
+  echo $I"macchina is installed, won't attempt reinstall."
+else
+  echo $I"macchina wasn't found. Installing macchina."
+  brew install macchina
+fi
+
+if exists htop; then
+  echo $I"htop is installed, won't attempt reinstall."
+else
+  echo $I"htop wasn't found. Installing htop."
+  brew install htop
+fi
+
 
 ### Install Mac App Store apps - use `mas search ____` to find app ids
 brew install mas
