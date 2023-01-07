@@ -111,7 +111,7 @@ defaults write com.apple.Finder AppleShowAllFiles true
 killall Dock; killall Finder
 
 # Install required cli utilities with brew
-brew install m-cli macchina 
+brew install m-cli macchina htop
 
 ### Install Mac App Store apps - use `mas search ____` to find app ids
 brew install mas
@@ -119,6 +119,9 @@ mas install 1451685025  # wireguard
 mas install 497799835   # xcode
 mas install 640199958   # apple developer
 mas install 899247664   # testflight
+mas install 1557247094  # hextedit
+mas install 1518425043  # boop
+mas install 937984704   # amphetamine
 
 ### Install some apps from homebrew casks
 
