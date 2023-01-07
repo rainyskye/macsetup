@@ -181,8 +181,8 @@ brew install --cask android-platform-tools
 # balenaetcher
 brew install --cask balenaetcher
 
-# blender
-brew install --cask blender
+# blender (disabled for the time being, due to main mirror being suuuupppppeeerrrr slow, and fucking with tests)
+# brew install --cask blender
 
 # burp-suite
 brew install --cask burp-suite
