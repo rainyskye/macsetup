@@ -11,6 +11,15 @@ W="[WARNING] "
 E="[ERROR] "
 F="[FATAL] "
 
+red=`tput setaf 1`
+green=`tput setaf 2`
+yellow=`tput setaf 3`
+blue=`tput setaf 4`
+pink=`tput setaf 5`
+cyan=`tput setaf 6`
+white=`tput setaf 7`
+reset=`tput sgr0`
+
 # Flags for testing, etc.
 DEBUG=true           # May be used to enable/disable messages for testing.
 INTERACTIVE=false    # TODO: Add ability to interact with script (e.g: choose whether to install missing deps or exit)
@@ -102,6 +111,48 @@ killall Dock; killall Finder
 
 # Install required cli utilities with brew
 brew install m-cli macchina 
+
+### Install Mac App Store apps - use `mas search ____` to find app ids
+brew install mas
+mas install 1451685025  # wireguard
+mas install 497799835   # xcode
+mas install 640199958   # apple developer
+mas install 899247664   # testflight
+
+### Install some apps from homebrew casks
+
+# macs-fan-control
+brew install --cask macs-fan-control
+
+# google-chrome
+brew install --cask google-chrome
+
+# 1password
+brew install --cask 1password
+
+# android-platform-tools
+brew install --cask andorid-platform-tools
+
+# balenaetcher
+brew install --cask balenaetcher
+
+# blender
+brew install --cask blender
+
+# burp-suite
+brew install --cask burp-suite
+
+# caffeine
+brew install --cask caffeine
+
+# cyberduck
+brew install --cask cyberduck
+
+# spotify
+brew install --cask spotify
+
+# visual-studio-code
+brew install --cask visual-studio-code
 
 # Cope macchina config
 mkdir -p ~/.config/macchina/    # Create macchina config folder

@@ -20,3 +20,8 @@ Please note that you should **always** check scripts before you run them on your
 ```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/lunaskyy/macsetup/main/setup.sh)"
 ```
+
+## Downloading Mac App Store apps
+Due to some interesting changes made by Apple, the `mas` tool used by the macsetup scripts have broken some features, the `signin`, `purchase` and `account` commands have all been broken in macOS 10.13, 10.15 and 12 respectfully.
+
+This will limit some automation of the script, you will need to pre "purchase" the apps from the mac app store prior to using the script to install the apps, this will then apply the licence to your account (even if it's a free app), to allow you to install the apps in the future unattended.
